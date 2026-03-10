@@ -1,8 +1,12 @@
 package com.basic.myspringboot.entity;
 
 import jakarta.persistence.*; // JPA 표준 어노테이션 임포트
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity // JPA가 관리할 엔티티 객체 지정
+@Getter
+@Setter
 @Table(name="customers") // 매핑할 DB 테이블 이름을 'customers'로 지정
 public class Customer {
 
