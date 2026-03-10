@@ -86,5 +86,20 @@ class CustomerRepositoryTest {
 
         // 3. 새로 만들어진 빈 객체이므로 아직 ID가 없음을(null) 확인하여 테스트 통과
         assertThat(existCustomer.getId()).isNull();
+
+        Customer notFoundCustomer = customerRepository.findById(2L)
+                .orElseThrow(() -> new RuntimeException("Customer Not Found"));
+    }
+
+    @Test
+    //@Rollback(value=false)
+    void testUpdate() {
+        //조회를 하고 setter 호출하면 update 됨
+        Customer customer = customerRepository.findByCustomerId("A002")
+                .orElseThrow(() -> new RuntimeException("Customer Not Found"));
+        customer.setCustomerName("스프링부트22"); // 테이블에 업데이트 됨
+        customerRepository.save(customer);
+        // save 를 안하려면 @Transactional 있어야함 .
+        assertThat(customer.getCustomerName()).isEqualTo("스프링부트22");
     }
 }

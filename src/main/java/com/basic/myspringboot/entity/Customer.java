@@ -3,10 +3,12 @@ package com.basic.myspringboot.entity;
 import jakarta.persistence.*; // JPA 표준 어노테이션 임포트
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity // JPA가 관리할 엔티티 객체 지정
 @Getter
 @Setter
+@DynamicUpdate // name 만 바꿨는데, 불필요하게 id 까지 업데이트 해서.
 @Table(name="customers") // 매핑할 DB 테이블 이름을 'customers'로 지정
 public class Customer {
 
@@ -19,5 +21,6 @@ public class Customer {
 
     @Column(nullable = false) // 필수 입력(null 불가)
     private String customerName; // 고객 이름 (주의: customerName 오타 있음)
+
 
 }
